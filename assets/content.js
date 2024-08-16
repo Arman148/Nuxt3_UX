@@ -1,5 +1,5 @@
 export const content = {
-    headerText: "Zvýšte svoje zisky optimalizáciou vášho eshopu.",
+  headerTitle: "Zvýšte svoje zisky optimalizáciou vášho eshopu.",
     formText: {
       namePlaceholder: "Meno",
       emailPlaceholder: "E-mail",

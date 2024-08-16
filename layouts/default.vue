@@ -1,8 +1,6 @@
 <template>
     <div>
-      <header>
-        <h1>{{ content.headerText }}</h1>
-      </header>
+      <Header :title="headerTitle" />
       <main>
         <slot />
       </main>
@@ -21,6 +19,10 @@
   </style>
 
 <script setup>
-    import { content } from '~/assets/content.js'
+    import { content } from '~/assets/content.js';
+    import Header from '@/components/Header.vue';
+
+    const headerTitle = content.headerTitle;
+
 </script>
   
