@@ -1,32 +1,51 @@
 <template>
   <header class="header">
     <div class="header-content">
-      <img src="@/assets/logo.svg" alt="Logo" class="header-logo" />
-      <h1 class="header-title">{{ title }}</h1>
-      <button class="header-button">Click Me</button>
+      <div class="header-top">
+        <img :src="logo" alt="Logo" class="header-logo" />
+        <ReusableButton :text="buttonText" :clickHandler="buttonAction" />
+      </div>
+      <h1 class="header-title">{{ headerTitle }}</h1>
     </div>
   </header>
 </template>
 
 <script setup>
-defineProps({
-  title: {
+import ReusableButton from '~/components/ReusableButton.vue';
+
+const props = defineProps({
+  logo: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+  headerTitle: {
+    type: String,
+    required: true,
+  },
+  buttonText: {
+    type: String,
+    required: true,
+  },
+  buttonAction: {
+    type: Function,
+    default: () => alert('Button clicked!'), // Default action
+  },
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .header {
   width: 100%;
-  height: 554px;
-  background: linear-gradient(159.13deg, #3D2E80 51.38%, #DC1969 125.72%);
+  background: linear-gradient(159.13deg, #3d2e80 51.38%, #dc1969 125.72%);
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  padding: 20px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  // Responsive heights
+  height: 554px;
 
   @media (max-width: 1024px) {
     height: 400px;
@@ -40,66 +59,60 @@ defineProps({
 
 .header-content {
   width: 100%;
-  max-width: 694px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 1440px; // Match footer width
   text-align: center;
+  padding: 0 20px; // Padding for smaller screens
 
   @media (max-width: 768px) {
-    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 .header-logo {
-  width: 100px; /* Adjust size as needed */
+  width: 145px;
   height: auto;
-  margin-bottom: 20px; /* Space between logo and title */
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 }
 
 .header-title {
   font-family: 'Mulish', sans-serif;
   font-size: 50px;
   font-weight: 900;
-  line-height: 1.2;
   color: #ffffff;
-  margin-bottom: 20px;
+  margin-top: 20px;
 
   @media (max-width: 1024px) {
     font-size: 40px;
-    line-height: 1.1;
   }
 
   @media (max-width: 768px) {
-    font-size: 32px;
+    font-size: 30px;
   }
 }
 
-.header-button {
+.reusable-button {
   width: 200px;
   height: 42px;
-  background-color: #EE325C;
-  color: #ffffff;
-  font-family: 'Mulish', sans-serif;
-  font-size: 14px;
-  font-weight: 900;
-  text-align: center;
-  line-height: 42px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 30px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #D31B53;
-  }
+  margin-top: 20px;
 
   @media (max-width: 768px) {
-    width: 180px;
-    height: 38px;
-    font-size: 13px;
-    line-height: 38px;
+    margin-top: 20px;
   }
 }
 </style>
